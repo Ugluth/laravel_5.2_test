@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Auth\EloquentUserProvider;
+
+use App\Admin;
 
 class AuthAdminsController extends Controller
 {
@@ -30,6 +33,12 @@ class AuthAdminsController extends Controller
     {
         \Log::info('within login of AuthAdminsController');
         $credentials = $request->only('email', 'password');
+
+        config('auth.defaults.guard', 'admin');
+        config('auth.defaults.passwords', 'admins');
+
+        $user_provider = new EloquentUserProvider(app('hash'), Admin::class);
+        app()->auth->setProvider($user_provider);
 
         if ($token = $this->guard()->attempt($credentials)) {
 
