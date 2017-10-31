@@ -1,15 +1,13 @@
 # Laravel Quickstart - Basic
 
-## Quck Installation
-
-    git clone https://github.com/laravel/quickstart-basic quickstart
-
-    cd quickstart
+## Installation
 
     composer install
 
     php artisan migrate
+	
+	Create the database on your local server (e.g. laravel-test and also update the .env file to reflect that)
+	
+	php artisan db:seed
 
     php artisan serve
-
-[Complete Tutorial](https://laravel.com/docs/5.2/quickstart)
